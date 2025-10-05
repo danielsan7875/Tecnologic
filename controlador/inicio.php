@@ -1,6 +1,6 @@
 <?php  
     $vista="Inicio - Dashboard";
-
+    $activo="1";
 
 
 
