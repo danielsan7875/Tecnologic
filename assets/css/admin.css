@@ -1,0 +1,368 @@
+ /* Variables y ajustes de diseño */
+        :root {
+            --sidebar-width: 250px;
+            --main-bg-color: #f7f7fa; /* Fondo general del dashboard */
+            --card-bg-color: #ffffff; /* Fondo de las tarjetas */
+            --sidebar-bg-color: #ffffff; /* Fondo de la barra lateral */
+            --primary-color: #1c76aa; /* Azul principal */
+            --text-color-light: #9fa2b7; /* Color de texto gris claro */
+            --text-color-dark: #0c2e42; /* Color de texto oscuro */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--main-bg-color);
+            color: var(--text-color-dark);
+            overflow-x: hidden; /* Prevenir scroll horizontal */
+        }
+
+        /* ---------------------------------- */
+        /* ESTRUCTURA PRINCIPAL (FLEXBOX) */
+        /* ---------------------------------- */
+        .wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar - Fijo y en la izquierda */
+        .sidebar {
+            width: var(--sidebar-width);
+            min-width: var(--sidebar-width);
+            background-color: var(--sidebar-bg-color);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            position: fixed; /* Lo hace fijo al scroll */
+            height: 100vh;
+            overflow-y: auto;
+            transition: margin 0.3s;
+            z-index: 1010; /* Por encima del contenido */
+        }
+
+        /* Contenido Principal - Ocupa el resto del espacio */
+        .main-content-wrapper {
+            flex-grow: 1;
+            /* El margen izquierdo compensa el ancho del sidebar fijo */
+            margin-left: var(--sidebar-width); 
+            display: flex;
+            flex-direction: column; /* Para que el nav esté arriba y el footer (simulado) abajo */
+        }
+
+        /* Estilos para hacer el sidebar responsive */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                margin-left: calc(var(--sidebar-width) * -1); /* Ocultar sidebar */
+                position: absolute; /* Para que no ocupe espacio cuando esté oculto */
+            }
+
+            .sidebar.active {
+                margin-left: 0; /* Mostrar sidebar al hacer clic */
+            }
+
+            .main-content-wrapper {
+                margin-left: 0; /* No hay margen cuando el sidebar está oculto */
+            }
+
+            /* Overlay oscuro para el móvil */
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1040;
+                display: none;
+            }
+
+            .overlay.active {
+                display: block;
+            }
+        }
+
+        /* ---------------------------------- */
+        /* ESTILOS DE COMPONENTES ESPECÍFICOS */
+        /* ---------------------------------- */
+
+        /* Estilo de los enlaces del Sidebar */
+        .sidebar .nav-link {
+            color: var(--text-color-dark);
+            padding: 10px 20px;
+            margin: 5px 0;
+            border-radius: 10px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: var(--primary-color);
+            color: white !important;
+        }
+
+        /* Estilo del enlace ACTIVO (Report) */
+        .sidebar .nav-link.active-link {
+            background-color: var(--primary-color);
+            color: white !important;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            font-weight: 600;
+        }
+
+        .sidebar .nav-link i {
+            width: 20px;
+            margin-right: 15px;
+        }
+
+        /* Estilo para las tarjetas */
+        .card {
+            background-color: var(--card-bg-color);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Card de Upgrade Pro (Fondo Oscuro) */
+        .card-upgrade {
+            background: #1e1e2d;
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-top: auto; /* Empuja la tarjeta al final del sidebar */
+            margin-bottom: 20px;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
+        /* Estilos de gráficos (para simular el azul y el rojo) */
+        .bg-blue-card {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .bg-primer{
+            background-color: #1f2d7e;
+            color:#ffffff;
+        }
+
+        .text-primary-blue {
+            color: var(--primary-color);
+        }
+
+        .text-green-percent {
+            color: #28c76f;
+        }
+
+        .bg-green-percent {
+            background-color: #28c76f20;
+            color: #28c76f;
+        }
+
+        .text-red-percent {
+            color: #ea5455;
+        }
+
+        .bg-red-percent {
+            background-color: #ea545520;
+            color: #ea5455;
+        }
+
+        /* Estilo para el Navbar Superior */
+        .navbar-top {
+            background-color: var(--main-bg-color); /* Igual que el fondo del contenido */
+            border-bottom: 1px solid #e9ecef;
+            padding: 1rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Separadores en el sidebar */
+        .sidebar-separator {
+            color: var(--text-color-light);
+            font-size: 0.75rem;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            padding-left: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+
+        /* Estilo moderno para el botón de perfil */
+.btn-profile {
+  background-color: #fff;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-profile:hover {
+  background-color: #f0f0f0;
+}
+
+/* Estilo para el dropdown */
+.dropdown-menu {
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  min-width: 200px;
+}
+
+.dropdown-item {
+  padding: 0.6rem 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+
+
+
+
+
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; 
+}
+
+.logo {
+  width: 80%;
+  height: auto; 
+}
+
+
+
+
+/* Botón de cierre en modo móvil */
+.btn-close-sidebar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #333;
+  z-index: 1001;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.btn-close-sidebar:hover {
+  color: #ff0606;
+
+}
+
+/* Sidebar activo en móvil */
+.sidebar.active {
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+/* Overlay para fondo oscuro al abrir sidebar */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+
+
+
+
+
+/* CSS
+.fondo-imagen {
+  flex-basis: 100%;
+  background-image: url('../img/logo/patrones.jpg'); 
+  background-size: cover;     
+  background-position: center; 
+  background-repeat: no-repeat; 
+}
+
+ */
+
+
+
+
+ /* Pantalla blanca completa */
+  .loader-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  /* Tu loader Wi-Fi azul */
+  .loader {
+    width: 65px;
+    aspect-ratio: 1;
+    position: relative;
+  }
+
+  .loader:before,
+  .loader:after {
+    content: "";
+    position: absolute;
+    border-radius: 50px;
+    box-shadow: 0 0 0 3px inset #1c76aa; /* Azul */
+    animation: l5 2.5s infinite;
+  }
+
+  .loader:after {
+    animation-delay: -1.25s;
+    border-radius: 0;
+  }
+
+  @keyframes l5 {
+    0%    { inset: 0 35px 35px 0; }
+    12.5% { inset: 0 35px 0 0; }
+    25%   { inset: 35px 35px 0 0; }
+    37.5% { inset: 35px 0 0 0; }
+    50%   { inset: 35px 0 0 35px; }
+    62.5% { inset: 0 0 0 35px; }
+    75%   { inset: 0 0 35px 35px; }
+    87.5% { inset: 0 0 35px 0; }
+    100%  { inset: 0 35px 35px 0; }
+  }
+
+
+
+
+
+
+ #btnSubir {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    display: none;
+    z-index: 1000;
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+  }
+
+  #btnSubir:hover {
+    opacity: 0.8;
+  }
