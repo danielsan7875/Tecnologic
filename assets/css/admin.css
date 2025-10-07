@@ -283,16 +283,16 @@
 
 
 
-/* CSS
-.fondo-imagen {
+
+.modal-body{
   flex-basis: 100%;
-  background-image: url('../img/logo/patrones.jpg'); 
-  background-size: cover;     
-  background-position: center; 
-  background-repeat: no-repeat; 
+  background-image: url('../img/11.png') !important; 
+  background-size: cover !important;     
+  background-position: center !important; 
+  background-repeat: no-repeat !important; 
 }
 
- */
+
 
 
 
